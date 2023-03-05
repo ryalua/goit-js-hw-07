@@ -1,4 +1,43 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
+const refs = {
+    galleryCreature: document.querySelector('.gallery'),
+    largeImage: document.querySelector('.gallery__item'),
+};
 
-console.log(galleryItems);
+const makeGallery = ({ preview, original, description,
+}) => `<li>
+            <a class="gallery__link" href="${original}">
+                <img
+                class="gallery__image"
+                src="${preview}"
+                alt="${description}"
+                />
+            </a>
+        </li>`;
+
+const markup = galleryItems
+  .map((image) => makeGallery(image) )
+  .join('');
+  
+refs.galleryCreature.insertAdjacentHTML("afterbegin", markup);
+
+refs.galleryCreature.addEventListener('click', hendleImageClick);
+
+function hendleImageClick(event) {
+    event.preventDefault();
+    if (event.target.nodeName !== 'IMG') {
+        return;
+    }
+    return event.target.galleryItem;
+};
+
+var lightbox = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionPosition: 'bottom',
+        captionDelay: 250,
+        scrollZoom: true,
+        scrollZoomFactor: 0.1,
+        
+    });
+
