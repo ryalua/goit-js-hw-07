@@ -1,8 +1,6 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
 const refs = {
     galleryCreature: document.querySelector('.gallery'),
-    largeImage: document.querySelector('.gallery__item'),
 };
 
 const makeGallery = ({ preview, original, description,
@@ -22,22 +20,11 @@ const markup = galleryItems
   
 refs.galleryCreature.insertAdjacentHTML("afterbegin", markup);
 
-refs.galleryCreature.addEventListener('click', hendleImageClick);
-
-function hendleImageClick(event) {
-    event.preventDefault();
-    if (event.target.nodeName !== 'IMG') {
-        return;
-    }
-    return event.target.galleryItem;
-};
-
-var lightbox = new SimpleLightbox('.gallery a', {
+new SimpleLightbox('.gallery a', {
         captionsData: 'alt',
-        captionPosition: 'bottom',
         captionDelay: 250,
         scrollZoom: true,
         scrollZoomFactor: 0.1,
-        
-    });
+    
+});
 
